@@ -16,91 +16,82 @@ Below is a **Mermaid diagram** showing a simplified set of **key tables** and th
 ```mermaid
 erDiagram
 
-    LA_Party ||--|{ LA_RRR : has
-    LA_BAUnit ||--|{ LA_RRR : has
+    LA_Party ||--|{ LA_RRR : "has"
+    LA_BAUnit ||--|{ LA_RRR : "has"
     LA_BAUnit ||--|{ TaxAssessment : "1-to-many"
     LA_BAUnit ||--|{ SupplementalAssessment : "1-to-many"
     LA_BAUnit ||--|{ TaxBill : "1-to-many"
-    TaxBill ||--|{ TaxPayment : "1-to-many"
+    TaxBill   ||--|{ TaxPayment : "1-to-many"
 
     LA_SpatialUnit ||--|{ LA_BAUnit : "1-to-many"
-    TaxRateArea ||--|{ LA_BAUnit : "1-to-many"
-    TaxRate ||--|{ TaxAssessment : "linked"
-    TaxRate ||--|{ SupplementalAssessment : "linked"
+    TaxRateArea    ||--|{ LA_BAUnit : "1-to-many"
+    TaxRate        ||--|{ TaxAssessment : "linked"
+    TaxRate        ||--|{ SupplementalAssessment : "linked"
 
     LA_Party {
         BIGSERIAL party_id PK
         VARCHAR party_name
         VARCHAR party_type
-        ...
     }
 
     LA_BAUnit {
         BIGSERIAL ba_unit_id PK
         VARCHAR unit_name
         VARCHAR assessor_parcel_number
-        BIGINT spatial_unit_id FK
-        BIGINT tra_id FK
-        ...
+        BIGINT spatial_unit_id
+        BIGINT tra_id
     }
 
     LA_SpatialUnit {
         BIGSERIAL spatial_unit_id PK
-        geometry geometry
+        TEXT spatial_geom
         VARCHAR address
-        ...
     }
 
     LA_RRR {
         BIGSERIAL rrr_id PK
-        BIGINT ba_unit_id FK
-        BIGINT party_id FK
+        BIGINT ba_unit_id
+        BIGINT party_id
         VARCHAR rrr_type
-        ...
     }
 
     TaxAssessment {
         BIGSERIAL assessment_id PK
-        BIGINT ba_unit_id FK
-        BIGINT tax_rate_id FK
-        ...
+        BIGINT ba_unit_id
+        BIGINT tax_rate_id
     }
 
     SupplementalAssessment {
         BIGSERIAL supplemental_id PK
-        BIGINT ba_unit_id FK
-        BIGINT tax_rate_id FK
-        ...
+        BIGINT ba_unit_id
+        BIGINT tax_rate_id
     }
 
     TaxRateArea {
         BIGSERIAL tra_id PK
         VARCHAR tra_code
-        ...
     }
 
     TaxRate {
         BIGSERIAL tax_rate_id PK
         VARCHAR rate_name
         NUMERIC rate_value
-        ...
     }
 
     TaxBill {
-        DATE bill_date PK_part
-        BIGSERIAL bill_uid PK_part
-        BIGINT ba_unit_id FK
-        BIGINT party_id FK
-        ...
+        DATE bill_date
+        BIGSERIAL bill_uid
+        BIGINT ba_unit_id
+        BIGINT party_id
     }
 
     TaxPayment {
-        DATE payment_date PK_part
-        BIGSERIAL payment_uid PK_part
-        DATE bill_date FK_part
-        BIGINT bill_uid FK_part
-        ...
+        DATE payment_date
+        BIGSERIAL payment_uid
+        DATE bill_date
+        BIGINT bill_uid
     }
+
 ```
 
 **Notes**:
