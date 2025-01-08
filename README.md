@@ -1,7 +1,3 @@
-Below is an **updated README** (in Markdown) that includes **Mermaid** diagrams to enrich your explanation of the **schema** and **seeder** approach. The Mermaid diagrams illustrate both **entity relationships** (simplified) and the **seeder workflow**. You can copy this into your `README.md` and GitHub (or other platforms supporting Mermaid) will render the diagrams if enabled.
-
----
-
 # LADM-Based Property Tax Schema & Seeder (Riverside)
 
 This repository contains:
