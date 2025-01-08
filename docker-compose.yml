@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  db:
+    image: postgis/postgis:latest
+    container_name: property_tax_db
+    restart: always
+    
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: property_tax_db
+    
+    # Mount init.sql as read-only into the official init directory
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db_data:/var/lib/postgresql/data
+    
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
